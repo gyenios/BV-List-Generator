@@ -1,8 +1,10 @@
 import csv
+
+# A random number is generated and used to pick a vocalist at random
 from random import randrange
 
-def select_program():
-    
+# Function to determine the kind of program for which the list is needed
+def select_program():    
     print('''
                 KING'S PRAISE BV LIST GENERATOR
             What kind of program do you need this list for?
@@ -10,10 +12,10 @@ def select_program():
             [1] Major/Special program (eg. Conference)
             [2] Normal program (eg. Midweek service)
         ''')
-    
     program = input('>> ')
     return program
-    
+
+# Function to read csv file and return list of vocalists suitable for the specified program
 def bv_list(csv_file,program):
     tenors,altos,sopranos = [],[],[]
     with open(csv_file, newline='') as file:
@@ -38,16 +40,19 @@ def bv_list(csv_file,program):
                         sopranos.append(row['Name'])
     return [tenors,altos,sopranos]
 
+# Function to randomly pick vocalists from the list of qualified vocalists
 def random_pick(tenors,altos,sopranos): #Passing the part lists as arguments
     x,y,z = len(tenors),len(altos),len(sopranos) # stores the length of the lists 
     a,b,c = randrange(x),randrange(y),randrange(z) # storing the random indices
     selected = [tenors[a],altos[b],sopranos[c]] # final bv_list from random indices
     return selected
 
+# Function to display selected BVs on session for the program
 def get_list(list):
     for i in list:
         print(i)
 
+# Menu function
 def menu():
     n = 0
     selected = []
